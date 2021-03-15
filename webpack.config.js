@@ -5,11 +5,29 @@ const path = require("path");
 const webpack = require("webpack");
 
 module.exports = {
-  entry: "./assets/js/script.js",
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "main.bundle.js",
+  entry: {
+    app: "./assets/js/script.js",
+    events: "./assets/js/events.js",
+    schedule: "./assets/js/schedule.js",
+    tickets: "./assets/js/tickets.js",
   },
+  output: {
+    filename: "[name].bundle.js",
+    path: __dirname + "/dist",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jpg$/i,
+        use: [
+          {
+            loader: "file-loader",
+          },
+        ],
+      },
+    ],
+  },
+
   plugins: [
     new webpack.ProvidePlugin({
       $: "jquery",
