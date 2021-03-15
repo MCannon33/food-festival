@@ -18,10 +18,21 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jpg$/i,
+        test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
             loader: "file-loader",
+            options: {
+              name(file) {
+                return "[path][name].[ext]";
+              },
+              publicPath: function (url) {
+                return url.replace("../", "/assets/");
+              },
+            },
+          },
+          {
+            loader: "image-webpack-loader",
           },
         ],
       },
